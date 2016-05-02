@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Raw Tweets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Status date</th>
+      <th>Status</th>
+      <th>Status text</th>
+      <th>Screen name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @raw_tweets.each do |raw_tweet| %>
+      <tr>
+        <td><%= raw_tweet.status_date %></td>
+        <td><%= raw_tweet.status_id %></td>
+        <td><%= raw_tweet.status_text %></td>
+        <td><%= raw_tweet.screen_name %></td>
+        <td><%= link_to 'Show', raw_tweet %></td>
+        <td><%= link_to 'Edit', edit_raw_tweet_path(raw_tweet) %></td>
+        <td><%= link_to 'Destroy', raw_tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Raw tweet', new_raw_tweet_path %>

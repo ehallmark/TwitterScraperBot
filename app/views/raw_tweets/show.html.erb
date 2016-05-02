@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Status date:</strong>
+  <%= @raw_tweet.status_date %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @raw_tweet.status_id %>
+</p>
+
+<p>
+  <strong>Status text:</strong>
+  <%= @raw_tweet.status_text %>
+</p>
+
+<p>
+  <strong>Screen name:</strong>
+  <%= @raw_tweet.screen_name %>
+</p>
+
+<p>
+  <strong>Liar keyword:</strong>
+  <%= @raw_tweet.liar_keyword %>
+</p>
+
+<%= link_to 'Edit', edit_raw_tweet_path(@raw_tweet) %> |
+<%= link_to 'Back', raw_tweets_path %>
