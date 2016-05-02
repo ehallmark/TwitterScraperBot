@@ -9,13 +9,9 @@
 //
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
+// require turbolinks
+// require filterrific/filterrific-jquery
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
-//= require filterrific/filterrific-jquery
-//= require highcharts/highstock
-//= require highcharts/highcharts
-//= require highcharts/highcharts-more
-//= require highcharts/modules/exporting 
 //= require_tree .
