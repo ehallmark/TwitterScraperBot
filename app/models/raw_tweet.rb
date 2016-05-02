@@ -21,12 +21,19 @@ class RawTweet < ActiveRecord::Base
     where(terms.each.collect{|name| " lower(status_text) ilike '%#{name.downcase}%' " }.join(" OR ")) 
   }
     
-  def self.first_date
-    Date.new(2010,1,1)
+  def self.extractTwitterParams params
+    if params[:start_date].present?
+      start_date = Date.parse(params[:start_date])
+    else
+      start_date = nil
+    end
+    if params[:end_date].present?
+      end_date = Date.parse(params[:end_date])
+    else
+      end_date = nil
+    end
+    return start_date,end_date,(params[:hashtags] || "").split(" "),(params[:terms] || "").split(" "),(params[:tweeted_by] || "").split(" "),(params[:mentions] || "").split(" ")
   end
-  def self.last_date
-    Date.today
-  end    
   
   def self.download_database(params)
     startDate, endDate, hashtags, terms, screen_names, mentions = extractTwitterParams(params)
@@ -43,7 +50,7 @@ class RawTweet < ActiveRecord::Base
     
     methods = [:status_id, :status_date, :screen_name, :status_text, :user_mentioned, :user_hashtagged]
 
-    sheet1.row(0).replace methods
+    sheet1.row(0).replace methods.collect{|m| m.to_s }
     results = seedHelper false, startDate, endDate, hashtags, terms, screen_names, mentions
      
     if results.present?
@@ -64,7 +71,7 @@ class RawTweet < ActiveRecord::Base
     return unless hashtags.present? or terms.present? or screen_names.present? or mentions.present?
     
     #set up bot
-    browser = Watir::Browser.new :chrome
+    browser = Watir::Browser.new
     browser.goto "twitter.com"
 
     # start setting URL with search parameters
@@ -119,6 +126,9 @@ class RawTweet < ActiveRecord::Base
       # ingest all results
       ingestAll(browser,database)
     end
+    
+    browser.close
+    
   end
   
   def self.ingestAll browser, database

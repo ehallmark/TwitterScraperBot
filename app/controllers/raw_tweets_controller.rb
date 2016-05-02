@@ -12,13 +12,14 @@ class RawTweetsController < ApplicationController
   def show
   end
   
-  def download_csv
-    send_data RawTweet.download_csv(params), :type => "application/vnd.ms-excel", :disposition => 'attachment; filename=download.xls'
-  end
-  
-  def download_database
-    RawTweet.download_database(params)
-    redirect_to :back, notice: "Finished"
+  def download
+    if(params[:database].present? and params[:database].to_i == 1)
+      RawTweet.download_database(params)
+      redirect_to :back, notice: "Finished"
+    else
+      send_data RawTweet.download_csv(params), :type => "application/vnd.ms-excel", :disposition => 'attachment; filename=download.xls'
+    end
+    return
   end
 
   # GET /raw_tweets/new
