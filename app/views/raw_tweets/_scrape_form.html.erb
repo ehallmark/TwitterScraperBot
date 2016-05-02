@@ -1,0 +1,33 @@
+<%= form_tag download_path do %>
+  <div class="field">
+    <%= label_tag :start_date %><br>
+    <%= date_field_tag :start_date %>
+  </div>
+  <div class="field">
+    <%= label_tag :end_date %><br>
+    <%= date_field_tag :end_date %>
+  </div>
+  <div class="field">
+    <%= label_tag :terms %><br>
+    <%= text_field_tag :terms %>
+  </div>
+  <div class="field">
+    <%= label_tag :mentions %><br>
+    <%= text_field_tag :mentions %>
+  </div>
+  <div class="field">
+    <%= label_tag :hashtags %><br>
+    <%= text_field_tag :hashtags %>
+  </div>
+  <div class="field">
+    <%= label_tag :tweeted_by %><br>
+    <%= text_field_tag :tweeted_by %>
+  </div>
+  <div class="field">
+    <%= label_tag :store_in_database %><br>
+    <%= check_box_tag :database %>
+  </div>
+  <div class="actions">
+    <%= submit_tag "Scrape" %>
+  </div>
+<% end %>
